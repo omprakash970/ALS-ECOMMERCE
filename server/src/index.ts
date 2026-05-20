@@ -1,11 +1,23 @@
-import 'dotenv/config'; 
+import 'dotenv/config';
+
+import dns from "dns";
+
+dns.setServers([
+  '1.1.1.1', 
+  '8.8.8.8'
+])
+
+
 import express from 'express';
+
+
 import { connectDB } from './db';
 import cors from 'cors';
 import morgan from 'morgan';
 import { ok } from './utils/envelope';
 import { notFound } from './middleware/notFound';
 import { errorHandler } from './middleware/errorhandler';
+
 
 
 async function mainEntryFunction(){
