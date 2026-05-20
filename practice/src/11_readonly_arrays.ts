@@ -11,3 +11,4 @@ function sum(arr:readonly number[]):number{
   return s;
 }
 
+console.log(sum(nums));
