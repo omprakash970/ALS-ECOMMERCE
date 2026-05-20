@@ -31,5 +31,6 @@ function describeUserwithInOperator(user:Admin|Customer){
   }
 
 }
+
 const arrofUnion:(string|number)[]=["a", 1, "b", "2"]; 
-const unionOfArrays:string[]|number[]=["a", "b", "c"]; 
+const unionOfArrays:string[]|number[]=Math.random()>0.1?["a", "b", "c"]:[1, 2, 3];
