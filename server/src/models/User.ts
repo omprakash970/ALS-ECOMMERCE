@@ -37,21 +37,33 @@ const UserSchema = new mongoose.Schema({
     required:true,
     unique:true, 
     index:true
-  }, 
+  },
+
+  email:{
+    type:String,
+    required:true,
+    unique:true,
+    lowercase:true,
+    trim:true
+  },
+
   name:{
     type:String, 
     required:false, 
   },
+
   role:{
     type:String, 
     enum:['admin', 'user'],
     default:'user'
-  }, 
+  },
+
   points:{
     type:Number,
     default:0,
     min:0
-  }, 
+  },
+
   addresses:{
     type:[addressSchema],
     default:[]

@@ -2,6 +2,7 @@ import {Request, Response, NextFunction} from 'express';
 import {getAuth} from '@clerk/express'; 
 import { AppError } from '../utils/AppError';
 import { User } from '../models/User';
+import { asyncHandler } from '../utils/asyncHandler';
 
 export function requireAuth(req:Request, _res:Response, next:NextFunction){
 
@@ -24,3 +25,12 @@ export async function getDbUserFromReq(req:Request){
   return dbUser; 
 }
 
+export const requireAdmin=asyncHandler(
+  async (req:Request, _res:Response, next:NextFunction)=>{
+    const extractCurrentDbUser = await getDbUserFromReq(req);
+    if(extractCurrentDbUser.role!=='admin'){
+      throw new AppError('Admin access needed', 403);
+    }
+    next();
+  }
+)
