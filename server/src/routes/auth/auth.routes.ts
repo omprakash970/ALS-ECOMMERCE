@@ -68,3 +68,26 @@ authRouter.post("/sync", requireAuth,
   }),
 )
 
+authRouter.get(
+  "/me", requireAuth, asyncHandler(async(req, res)=>{
+    const {userId}=getAuth(req); 
+    if(!userId){
+      throw new AppError('User is not logged in', 401); 
+    }
+    const dbUser = await User.findOne({clerkUserId:userId});
+    if(!dbUser){
+      throw new AppError('User not found in DB', 404);
+    }
+    res.status(200).json(
+      ok({
+        user: {
+          id: dbUser._id,
+          clerkUserId: dbUser.clerkUserId,
+          email: dbUser.email,
+          name: dbUser.name,
+          role: dbUser.role,
+        },
+      }),
+    );
+  }),
+);
