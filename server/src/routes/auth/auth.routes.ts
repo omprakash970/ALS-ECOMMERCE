@@ -8,6 +8,7 @@ import { ok } from '../../utils/envelope';
 
 
 export const authRouter =Router(); 
+
 authRouter.post("/sync", requireAuth, 
 
   asyncHandler(async(req, res)=>{
